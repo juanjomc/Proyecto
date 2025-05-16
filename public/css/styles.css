@@ -1,0 +1,213 @@
+/* Aplicar tipografía más delgada a todo el sitio */
+body, h1, h2, h3, h4, h5, h6, a, .navbar .nav-link, .navbar-brand {
+    font-weight: lighter;
+}
+
+/* Estilo global para todos los botones */
+.btn {
+    background-color: #ff7ecb !important; /* Fondo rosa */
+    color: #ffffff !important; /* Texto blanco */
+    border: none !important; /* Sin borde */
+}
+
+.btn:hover {
+    background-color: #e066b3 !important; /* Fondo más oscuro al pasar el cursor */
+    color: #ffffff !important; /* Texto blanco */
+}
+
+/* Estilo para la barra de navegación */
+.navbar {
+    background-color: #ffffff !important; /* Fondo blanco */
+    height: 100px; /* Altura de 100 px */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.navbar .nav-link {
+    color: #000000 !important; /* Color negro para los enlaces */
+    transition: font-weight 0.2s ease; /* Transición suave al cambiar el peso de la fuente */
+}
+
+.navbar .nav-link:hover {
+    /* color: #007bff !important; Color azul al pasar el cursor */
+    font-weight: bold; /* Negrita al pasar el cursor */
+}
+
+.navbar-brand {
+    color: #000000 !important; /* Color negro para el logo */
+    font-size: 1.5rem; /* Tamaño del texto del logo */
+}
+
+
+/* Botones más grandes */
+.btn-custom-left, .btn-custom-right {
+    padding: 15px 30px; /* Aumentar el relleno interno */
+    font-size: 1.25rem; /* Aumentar el tamaño de la fuente */
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+}
+
+/* Cuadro de diálogo más grande */
+.dialog-box {
+    width: 80%; /* Aumentar el ancho al 80% del contenedor */
+    max-width: 700px; /* Limitar el ancho máximo a 900px */
+    padding: 40px 30px; /* Aumentar el relleno interno */
+    font-size: 1.2rem; /* Aumentar el tamaño del texto */
+    min-height: 250px; /* Aumentar la altura mínima */
+    
+}
+
+/* Sección con imagen de fondo */
+.position-relative {
+    height: 950px; /* Altura fija de 950px */
+    overflow: hidden; /* Ocultar cualquier contenido que exceda el contenedor */
+}
+
+.position-relative img {
+    object-fit: cover; /* Asegurar que la imagen cubra todo el contenedor */
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+}
+
+/* Estilo para el formulario de contacto */
+form {
+    max-width: 600px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centrar el formulario */
+}
+
+form .form-label {
+    font-weight: bold; /* Etiquetas en negrita */
+}
+
+form .form-control {
+    border-radius: 8px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Borde gris claro */
+}
+
+form .btn-primary {
+    background-color: #007bff; /* Azul Bootstrap */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 1.2rem; /* Tamaño del texto */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+form .btn-primary:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+}
+
+p {
+    font-size: 1.2rem; /* Tamaño de fuente igual al dialog-box */
+    line-height: 1.8; /* Espaciado entre líneas */
+    color: #333; /* Color gris oscuro */
+}
+
+/* Estilo para las imágenes en la sección "A Destacar" */
+.container .row img {
+    width: 100%; /* Asegurar que ocupen todo el ancho de la columna */
+    height: auto; /* Mantener la proporción de la imagen */
+    max-height: 400px; /* Limitar la altura máxima */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para las imágenes */
+}
+
+/* Estilo para las imágenes de la galería */
+.gallery-img {
+    cursor: pointer; /* Cambiar el cursor al pasar sobre la imagen */
+    transition: transform 0.3s ease; /* Animación suave al pasar el cursor */
+}
+
+.gallery-img:hover {
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño al pasar el cursor */
+}
+
+/* Ajustar el modal al tamaño de la imagen */
+.modal-dialog {
+    max-width: none; /* Permite que el ancho del modal dependa de la imagen */
+    width: auto; /* Ajusta el ancho al contenido */
+    height: auto; /* Ajusta la altura al contenido */
+    margin: 0 auto; /* Centra el modal horizontalmente */
+}
+
+.modal-content {
+    background-color: transparent; /* Fondo transparente para que solo se vea la imagen */
+    border: none; /* Elimina bordes del modal */
+    display: inline-block; /* Ajusta el contenido al tamaño de la imagen */
+}
+
+.modal-body {
+    padding: 0; /* Elimina el padding del cuerpo del modal */
+    display: flex; /* Usa flexbox para centrar la imagen */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+#galleryModalImage {
+    max-width: 100%; /* Ajustar al ancho máximo del viewport */
+    max-height: 80vh; /* Ajustar al alto máximo del viewport */
+    object-fit: contain; /* Mantiene las proporciones de la imagen */
+    display: block; /* Asegura que la imagen se comporte como un bloque */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+.fade-out {
+    opacity: 1;
+    transition: opacity 2s ease-out; /* Transición de 1 segundo */
+}
+
+.fade-out.hidden {
+    opacity: 0;
+}
+
+.text-success {
+    color: #28a745; /* Verde */
+    font-weight: bold;
+}
+
+.text-danger {
+    color: #dc3545; /* Rojo */
+    font-weight: bold;
+}
+
+/* ============================= */
+/* ESTILOS PERSONALIZADOS LITEPICKER */
+/* ============================= */
+
+.litepicker .day-item {
+    font-weight: bold;               /* Fuente más gruesa */
+    background-color: #f8f9fa;       /* Fondo claro para destacar */
+    color: #000000;                  /* Texto más visible */
+    border-radius: 4px;              /* Bordes redondeados */
+    transition: all 0.3s ease-in-out; /* Transición suave al pasar el cursor */
+    font-weight: 800;             /* Peso de fuente más grueso */
+}
+
+.litepicker .day-item:hover {
+    background-color: #dee2e6;       /* Color de fondo al pasar el cursor */
+    cursor: pointer;                 /* Cambiar cursor para mejor UX */
+}
+
+/* ============================= */
+/* ESTILOS PERSONALIZADOS MODAL */
+/* ============================= */
+
+/* Estilo para el modal */
+#loginModal .modal-dialog {
+    max-width: 400px; /* Ancho máximo del modal */
+    margin-top: 50px; /* Ajustar la posición vertical */
+}
+
+#loginModal .modal-content {
+    background-color: white; /* Fondo blanco */
+    padding: 1.5rem; /* Espaciado interno */
+    border-radius: 0.5rem; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+#loginModal .form-control {
+    max-width: 300px; /* Ancho máximo de los campos */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+#loginModal .btn {
+    max-width: 300px; /* Ancho máximo del botón */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
