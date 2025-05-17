@@ -273,9 +273,7 @@ session_start();
         
     </main>
     
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; <?php echo date("Y"); ?> Mi Proyecto Web. Todos los derechos reservados.</p>
-    </footer>
+    <?php require __DIR__ . '/footer.php'; ?>
     
 <!-- Modal para Login -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">

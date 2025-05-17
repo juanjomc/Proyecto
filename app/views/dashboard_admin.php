@@ -44,10 +44,8 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 1) {
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p>&copy; <?php echo date("Y"); ?> Mi Proyecto Web. Todos los derechos reservados.</p>
-    </footer>
+    <?php require __DIR__ . '/footer.php'; ?>
+
 
     <!-- Bootstrap JS desde CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

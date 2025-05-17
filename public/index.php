@@ -87,8 +87,14 @@ switch ($request) {
 
     case '/user/panel':
         //Panel de usuario
-        require '../app/views/dashboard_user.php';
-        break;
+        require '../app/controllers/UserController.php';
+        $controller = new UserController();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $controller->update();
+        } else {
+            $controller->showForm();
+        }
+    break;
 
     case '/login/authenticate':
         require '../app/controllers/LoginController.php';
@@ -97,19 +103,19 @@ switch ($request) {
         break;
 
     case '/registro':
-        require '../app/controllers/RegisterController.php';
+        require '../app/controllers/UserController.php';
         $controller = new RegisterController();
         $controller->showForm();
         break;
     
     case '/register/store':
-        require '../app/controllers/RegisterController.php';
+        require '../app/controllers/UserController.php';
         $controller = new RegisterController();
         $controller->store();
         break;
 
     case '/check-email':
-        require '../app/controllers/RegisterController.php';
+        require '../app/controllers/UserController.php';
         $controller = new RegisterController();
         $controller->checkEmail();
         break;

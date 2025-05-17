@@ -47,6 +47,8 @@
         <div id="registerResponse" class="mt-3"></div>
     </div>
 
+        <?php require __DIR__ . '/footer.php'; ?>
+
     <!-- Bootstrap JS desde CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/register.js"></script> <!-- Tu JavaScript personalizado -->

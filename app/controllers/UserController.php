@@ -51,4 +51,48 @@ class RegisterController {
         }
     }
 }
+
+// require '../../app/models/UserModel.php'; 
+
+class UserController {
+    public function showForm() {
+        session_start();
+        if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 2) {
+            header('Location: /');
+            exit;
+        }
+        $userId = $_SESSION['user']['id'];
+        $model = new UserModel();
+        $usuario = $model->obtenerPorId($userId);
+        $mensaje = '';
+        require __DIR__ . '/../views/dashboard_user.php';
+    }
+
+    public function update() {
+        session_start();
+        if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 2) {
+            header('Location: /');
+            exit;
+        }
+        $userId = $_SESSION['user']['id'];
+        $model = new UserModel();
+        $mensaje = '';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $datos = [
+                'nombre' => $_POST['nombre'] ?? '',
+                'apellidos' => $_POST['apellidos'] ?? '',
+                'correo' => $_POST['correo'] ?? '',
+                'fecha_nacimiento' => $_POST['fecha_nacimiento'] ?? ''
+            ];
+            if ($model->actualizarUsuario($userId, $datos)) {
+                $mensaje = "Datos actualizados correctamente.";
+                $_SESSION['user']['correo'] = $datos['correo'];
+            } else {
+                $mensaje = "Error al actualizar los datos.";
+            }
+        }
+        $usuario = $model->obtenerPorId($userId);
+        require __DIR__ . '/../views/dashboard_user.php';
+    }
+}
 ?>

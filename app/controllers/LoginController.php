@@ -25,7 +25,7 @@ class LoginController
 
         try {
             global $pdo;
-            $stmt = $pdo->prepare("SELECT correo, password, level FROM users WHERE correo = :correo");
+            $stmt = $pdo->prepare("SELECT correo, password, level,id FROM users WHERE correo = :correo");
             $stmt->bindParam(':correo', $correo);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -37,7 +37,8 @@ class LoginController
                 error_log("Contraseña verificada correctamente.");
                 $_SESSION['user'] = [
                     'correo' => $user['correo'],
-                    'level' => $user['level']
+                    'level' => $user['level'],
+                    'id' => $user['id']
                 ];
                 echo json_encode(['success' => true, 'level' => $user['level']]);
             } else {

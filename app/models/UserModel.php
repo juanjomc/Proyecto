@@ -46,5 +46,25 @@ class UserModel {
     
         return $count > 0;
     }
+
+    public function obtenerPorId($id) {
+        error_log("Error en la consulta: " . print_r($id, true));
+        $sql = "SELECT id, nombre, apellidos, correo, fecha_nacimiento FROM users WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function actualizarUsuario($id, $datos) {
+        $sql = "UPDATE users SET nombre = :nombre, apellidos = :apellidos, correo = :correo, fecha_nacimiento = :fecha_nacimiento WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':nombre', $datos['nombre'], PDO::PARAM_STR);
+        $stmt->bindValue(':apellidos', $datos['apellidos'], PDO::PARAM_STR);
+        $stmt->bindValue(':correo', $datos['correo'], PDO::PARAM_STR);
+        $stmt->bindValue(':fecha_nacimiento', $datos['fecha_nacimiento'], PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }
 ?>
