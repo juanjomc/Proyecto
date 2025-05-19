@@ -120,11 +120,11 @@ switch ($request) {
         $controller->checkEmail();
         break;
 
-    // case 'reservas':
-    //     require '../app/controllers/ReservaController.php';
-    //     $controller = new ReservaController();
-    //     $controller->showForm();
-    //     break;
+    case '/reservar':
+        require '../app/controllers/ReservaController.php';
+        $controller = new ReservaController();
+        $controller->showForm();
+        break;
         
     // case 'reservas/store':
     //     require '../app/controllers/ReservaController.php';
@@ -137,11 +137,11 @@ switch ($request) {
     //     $controller = new ReservaController();
     //     $controller->obtenerReservas();
     //     break;
-    // case 'tarifas/obtener':
-    //     require '../app/controllers/TarifasController.php';
-    //     $controller = new TarifasController();
-    //     $controller->obtenerTarifas();
-    //     break;
+    case '/tarifas/obtener':
+        require '../app/controllers/TarifasController.php';
+        $controller = new TarifasController();
+        $controller->obtenerTarifas();
+        break;
 
     // case 'login/authenticate':
     //     require '../app/controllers/LoginController.php';

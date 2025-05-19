@@ -1,3 +1,33 @@
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    // Mostrar mensaje y redirigir a registro después de 5 segundos
+    echo '
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Reservas</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script>
+            setTimeout(function() {
+                window.location.href = "/registro";
+            }, 5000);
+        </script>
+    </head>
+    <body>
+        <div class="container mt-3">
+            <div class="alert alert-success fade-out">
+                Debes estar registrado para hacer una reserva.<br>
+            </div>
+        </div>
+    </body>
+    </html>
+    ';
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -69,8 +99,16 @@
         });
 
         function calcularDesglose(start, end) {
-            const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-            const limpieza = 30; // Tarifa de limpieza
+            const diasSemana = [
+                'domingo',     // 0
+                'laborables',  // 1
+                'laborables',  // 2
+                'laborables',  // 3
+                'laborables',  // 4
+                'laborables',  // 5
+                'sabados'      // 6
+            ];
+            const limpieza = tarifas['limpieza'] ? parseFloat(tarifas['limpieza']) : 0;
 
             let desgloseHTML = '';
             let total = 0;
@@ -82,24 +120,23 @@
             // Crear un array con todas las fechas del rango
             const dias = [];
             while (fechaInicio <= fechaFin) {
-                dias.push(new Date(fechaInicio)); // Agregar cada día al array
-                fechaInicio.setDate(fechaInicio.getDate() + 1); // Incrementar un día
+                dias.push(new Date(fechaInicio));
+                fechaInicio.setDate(fechaInicio.getDate() + 1);
             }
 
             // Generar el desglose día por día
             desgloseHTML += '<h5>Desglose de días:</h5><ul>';
             dias.forEach(dia => {
-                const diaSemana = diasSemana[dia.getDay()];
+                const grupo = diasSemana[dia.getDay()];
                 const fechaFormateada = dia.toISOString().split('T')[0];
-                const tarifa = tarifas[diaSemana]; // Obtener la tarifa desde la base de datos
+                const tarifa = tarifas[grupo] ? parseFloat(tarifas[grupo]) : 0;
 
-                // Agregar el día al desglose
-                desgloseHTML += `<li>${fechaFormateada} ${diaSemana} - ${tarifa}€</li>`;
-                total += parseFloat(tarifa);
+            desgloseHTML += `<li>${fechaFormateada} (${grupo}) - ${tarifa}€</li>`;
+            total += tarifa;
             });
             desgloseHTML += '</ul>';
 
-            // Agregar tarifa de limpieza
+            // Agregar tarifa de limpieza como concepto aparte
             desgloseHTML += `<h5>Limpieza:</h5><p>${limpieza}€</p>`;
             total += limpieza;
 

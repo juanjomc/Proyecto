@@ -1,16 +1,25 @@
 <?php
+
+require_once '../app/config/db.php'; // Incluye el archivo de configuración y conexión
+
+
 class TarifasModel {
     private $pdo;
 
     public function __construct() {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=proyecto', 'juanjo', 'juanj0xm'); // Cambia los valores según tu configuración
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        global $pdo; // Usa la conexión global definida en db.php
+        $this->pdo = $pdo;
+
+        if (!$this->pdo) {
+            die("Error: No se pudo establecer la conexión a la base de datos.");
+        }
     }
 
+
     public function getTarifas() {
-        $sql = "SELECT Domingo, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado FROM tarifas WHERE id = 1"; // Ajusta el ID según tu lógica
+        $sql = "SELECT opcion, valor FROM opciones where opcion in ('laborables', 'sabados','domingos','limpieza');"; // Ajusta el ID según tu lógica
         $stmt = $this->pdo->query($sql);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

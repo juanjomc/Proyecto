@@ -36,7 +36,7 @@ session_start();
                 <?php else: ?>
                     <!-- Usuario no logueado -->
                     <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
-                <?php endif; ?>                <li class="nav-item"><a class="nav-link" href="/">Reservar</a></li>
+                <?php endif; ?>                <li class="nav-item"><a class="nav-link" href="/reservar">Reservar</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contactar">Contactar</a></li>
                 <li class="nav-item"><a class="nav-link" href="#apartamento">Apartamento</a></li>
                 <li class="nav-item"><a class="nav-link" href="#donde">Dónde Estamos</a></li>
