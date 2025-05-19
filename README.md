@@ -40,8 +40,10 @@ mi-proyecto-web
 
 4.- Usuarios
 
-nombre    pass      rango
-ju@ju.com   1    adminitrador
-aa@aa.com   1    usuario normal
+nombre ==> ju@ju.com    
+pass ==> 1     
+rango ==> administrador
 
-# Proyecto
+nombre ==> aa@aa.com    
+pass ==> 1     
+rango ==> usuario normal
