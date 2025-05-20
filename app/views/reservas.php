@@ -42,6 +42,7 @@ if (!isset($_SESSION['user'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css">
 </head>
 <body>
+    <?php require_once "menu.php";?>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Realizar una Reserva</h2>
         <form id="reservaForm" method="POST" class="p-4 rounded shadow bg-light">

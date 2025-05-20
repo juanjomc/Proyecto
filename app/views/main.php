@@ -16,36 +16,7 @@ session_start();
     <link rel="stylesheet" href="/css/styles.css"> <!--CSS personalizado -->
 </head>
 <body>
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 1050; position: relative;">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" style="max-height: 120px;"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <?php if (isset($_SESSION['user'])): ?>
-                    <?php if ($_SESSION['user']['level'] == 1): ?>
-                        <!-- Usuario administrador -->
-                        <li class="nav-item"><a class="nav-link" href="/admin/panel">Panel de Administrador</a></li>
-                    <?php else: ?>
-                        <!-- Usuario normal -->
-                        <li class="nav-item"><a class="nav-link" href="/user/panel">Mi Perfil</a></li>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <!-- Usuario no logueado -->
-                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
-                <?php endif; ?>                <li class="nav-item"><a class="nav-link" href="/reservar">Reservar</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contactar">Contactar</a></li>
-                <li class="nav-item"><a class="nav-link" href="#apartamento">Apartamento</a></li>
-                <li class="nav-item"><a class="nav-link" href="#donde">Dónde Estamos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#destacar">A Destacar</a></li>
-                <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php require_once "menu.php";?>
 
     <!-- Sección con imagen y texto -->
     <div class="position-relative"> <!-- Agregar margen superior -->

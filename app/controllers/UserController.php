@@ -70,29 +70,41 @@ class UserController {
 
     public function update() {
         session_start();
-        if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 2) {
-            header('Location: /');
-            exit;
+    if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 2) {
+        header('Location: /');
+        exit;
+    }
+    $userId = $_SESSION['user']['id'];
+    $model = new UserModel();
+    $mensaje = '';
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $datos = [
+            'nombre' => $_POST['nombre'] ?? '',
+            'apellidos' => $_POST['apellidos'] ?? '',
+            'fecha_nacimiento' => $_POST['fecha_nacimiento'] ?? ''
+        ];
+
+        // Comprobar si se quiere cambiar la contraseña
+        $password = $_POST['password'] ?? '';
+        $password2 = $_POST['password2'] ?? '';
+        if (!empty($password) || !empty($password2)) {
+            if ($password === $password2) {
+                $datos['password'] = password_hash($password, PASSWORD_BCRYPT);
+            } else {
+                $mensaje = "Las contraseñas no coinciden.";
+            }
         }
-        $userId = $_SESSION['user']['id'];
-        $model = new UserModel();
-        $mensaje = '';
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $datos = [
-                'nombre' => $_POST['nombre'] ?? '',
-                'apellidos' => $_POST['apellidos'] ?? '',
-                'correo' => $_POST['correo'] ?? '',
-                'fecha_nacimiento' => $_POST['fecha_nacimiento'] ?? ''
-            ];
+
+        if (empty($mensaje)) {
             if ($model->actualizarUsuario($userId, $datos)) {
                 $mensaje = "Datos actualizados correctamente.";
-                $_SESSION['user']['correo'] = $datos['correo'];
             } else {
                 $mensaje = "Error al actualizar los datos.";
             }
         }
-        $usuario = $model->obtenerPorId($userId);
-        require __DIR__ . '/../views/dashboard_user.php';
+    }
+    $usuario = $model->obtenerPorId($userId);
+    require __DIR__ . '/../views/dashboard_user.php';
     }
 }
 ?>

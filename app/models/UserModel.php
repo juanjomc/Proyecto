@@ -57,14 +57,22 @@ class UserModel {
     }
 
     public function actualizarUsuario($id, $datos) {
-        $sql = "UPDATE users SET nombre = :nombre, apellidos = :apellidos, correo = :correo, fecha_nacimiento = :fecha_nacimiento WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':nombre', $datos['nombre'], PDO::PARAM_STR);
-        $stmt->bindValue(':apellidos', $datos['apellidos'], PDO::PARAM_STR);
-        $stmt->bindValue(':correo', $datos['correo'], PDO::PARAM_STR);
-        $stmt->bindValue(':fecha_nacimiento', $datos['fecha_nacimiento'], PDO::PARAM_STR);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        return $stmt->execute();
+    // Construir la consulta dinámicamente
+    $sql = "UPDATE users SET nombre = :nombre, apellidos = :apellidos, fecha_nacimiento = :fecha_nacimiento";
+    if (!empty($datos['password'])) {
+        $sql .= ", password = :password";
+    }
+    $sql .= " WHERE id = :id";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':nombre', $datos['nombre'], PDO::PARAM_STR);
+    $stmt->bindValue(':apellidos', $datos['apellidos'], PDO::PARAM_STR);
+    $stmt->bindValue(':fecha_nacimiento', $datos['fecha_nacimiento'], PDO::PARAM_STR);
+    if (!empty($datos['password'])) {
+        $stmt->bindValue(':password', $datos['password'], PDO::PARAM_STR);
+    }
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    return $stmt->execute();
     }
 }
 ?>
