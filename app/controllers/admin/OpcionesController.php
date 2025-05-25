@@ -6,8 +6,9 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 1) {
 }
 
 // Incluir la conexión a la base de datos
-require_once __DIR__ . '/../../config/db.php';
-
+if (!isset($pdo)) {
+    require_once __DIR__ . '/../../config/db.php';
+}
 class OpcionesController
 {
     public function index()
@@ -44,4 +45,35 @@ class OpcionesController
             echo json_encode(['success' => false, 'error' => $e->getMessage()]);
         }
     }
+
+    public function cambiarPassword()
+{
+    global $pdo;
+    $mensaje = '';
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = $_SESSION['user']['id'];
+        $password_actual = $_POST['password_actual'] ?? '';
+        $password_nueva = $_POST['password_nueva'] ?? '';
+        $password_nueva2 = $_POST['password_nueva2'] ?? '';
+
+        // Obtener el hash actual
+        $stmt = $pdo->prepare("SELECT password FROM users WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+        $hash = $stmt->fetchColumn();
+
+        if (!$hash || !password_verify($password_actual, $hash)) {
+            $mensaje = "La contraseña actual no es correcta.";
+        } elseif ($password_nueva !== $password_nueva2) {
+            $mensaje = "Las nuevas contraseñas no coinciden.";
+        } else {
+            $nuevo_hash = password_hash($password_nueva, PASSWORD_BCRYPT);
+            $stmt = $pdo->prepare("UPDATE users SET password = :password WHERE id = :id");
+            $stmt->execute(['password' => $nuevo_hash, 'id' => $id]);
+            $mensaje = "Contraseña actualizada correctamente.";
+        }
+    }
+
+    require __DIR__ . '/../../views/admin/cambiar_password_admin.php';
+}
 }

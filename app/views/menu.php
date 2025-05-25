@@ -1,7 +1,24 @@
-    
-    
 <?php 
-if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 2) { ?>
+
+// if (!isset($pdo)) {
+    $pdo = require __DIR__ . '/../config/db.php';
+// }
+// global $pdo;
+
+$numeroWhatsapp = '';
+$mensajeWhatsapp = '¡Hola!';
+
+try {
+    $stmt = $pdo->prepare("SELECT opcion, valor FROM opciones WHERE opcion IN ('mv_whatsapp', 'mensaje_whatsapp')");
+    $stmt->execute();
+    $opcionesMenu = $stmt->fetchAll(PDO::FETCH_KEY_PAIR); // Renombrado para evitar conflicto
+    $numeroWhatsapp = isset($opcionesMenu['mv_whatsapp']) ? $opcionesMenu['mv_whatsapp'] : '';
+    $mensajeWhatsapp = isset($opcionesMenu['mensaje_whatsapp']) ? $opcionesMenu['mensaje_whatsapp'] : '¡Hola!';
+} catch (Exception $e) {
+    // Manejo del error
+}
+
+if (!isset($_SESSION['user'])) { ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 1050; position: relative;">
     <div class="container-fluid">
         <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" style="max-height: 120px;"></a>
@@ -12,14 +29,11 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 2) { ?>
             <ul class="navbar-nav ms-auto">
                 <?php if (isset($_SESSION['user'])): ?>
                     <?php if ($_SESSION['user']['level'] == 1): ?>
-                        <!-- Usuario administrador -->
                         <li class="nav-item"><a class="nav-link" href="/admin/panel">Panel de Administrador</a></li>
                     <?php else: ?>
-                        <!-- Usuario normal -->
                         <li class="nav-item"><a class="nav-link" href="/user/panel">Mi Perfil</a></li>
                     <?php endif; ?>
                 <?php else: ?>
-                    <!-- Usuario no logueado -->
                     <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
                 <?php endif; ?>
                 <li class="nav-item"><a class="nav-link" href="/reservar">Reservar</a></li>
@@ -28,6 +42,12 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 2) { ?>
                 <li class="nav-item"><a class="nav-link" href="/#donde">Dónde Estamos</a></li>
                 <li class="nav-item"><a class="nav-link" href="/#destacar">A Destacar</a></li>
                 <li class="nav-item"><a class="nav-link" href="/#galeria">Galería</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank"
+                        href="https://wa.me/<?php echo htmlspecialchars($numeroWhatsapp); ?>?text=<?php echo urlencode($mensajeWhatsapp); ?>">
+                        <img src="/img/WhatsApp.webp" alt="WhatsApp" style="height: 20px; margin-right: 5px;">
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -36,7 +56,6 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 2) { ?>
 
 }
 elseif ( $_SESSION['user']['level'] == 1) { ?>
- <!-- Barra de navegación -->
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
         <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" style="max-height: 120px;"></a>
@@ -53,6 +72,7 @@ elseif ( $_SESSION['user']['level'] == 1) { ?>
                         <ul class="dropdown-menu" aria-labelledby="utilidadesDropdown">
                             <li><a class="dropdown-item" href="/admin/utilidades/basedatos">Base de Datos</a></li>
                             <li><a class="dropdown-item" href="/admin/utilidades/opciones">Opciones</a></li>
+                            <li><a class="dropdown-item" href="/admin/utilidades/pass">Cambiar contraseña</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/admin/contactos">Formulario de Contactos</a></li>
@@ -81,4 +101,6 @@ elseif ( $_SESSION['user']['level'] == 2) {
         </div>
     </div>
 </nav>
-<?php }?>
+<?php
+}
+?>

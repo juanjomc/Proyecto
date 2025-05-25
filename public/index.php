@@ -84,6 +84,13 @@ switch ($request) {
         $controller = new OpcionesController();
         $controller->update();
         break;
+        
+    case '/admin/utilidades/pass':
+        //Actualizar opciones
+        require '../app/controllers/admin/OpcionesController.php';
+        $controller = new OpcionesController();
+        $controller->cambiarPassword();
+    break;
 
     case '/user/panel':
         //Panel de usuario
@@ -125,7 +132,18 @@ switch ($request) {
         $controller = new ReservaController();
         $controller->showForm();
         break;
-        
+
+    case '/menu':
+        require '../app/views/menu.php';
+        // $controller = new ReservaController();
+        // $controller->showForm();
+        break;
+    
+    case '/test':
+        require '../app/views/testdb.php';
+        // $controller = new ReservaController();
+        // $controller->showForm();
+        break;
     // case 'reservas/store':
     //     require '../app/controllers/ReservaController.php';
     //     $controller = new ReservaController();

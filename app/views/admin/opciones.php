@@ -14,7 +14,7 @@ if (isset($_GET['success'])) {
     <link rel="stylesheet" href="/css/styles.css"> <!--CSS personalizado -->
 </head>
 <body>
-    <?php require_once __DIR__ . '/menu_admin.php'; ?>
+    <?php require_once __DIR__ . '/../menu.php'; ?>
 
     <main class="container mt-5">
         <h1 class="text-center mb-4">Modificar Opciones</h1>

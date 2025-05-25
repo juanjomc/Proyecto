@@ -17,7 +17,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 1) {
     <link rel="stylesheet" href="/css/styles.css"> <!-- Asegúrate de que este archivo sea el mismo que usas en main.php -->
 </head>
 <body>
-    <?php require_once __DIR__ . '/menu_admin.php'; ?>
+    <?php require_once __DIR__ . '/../menu.php'; ?>
 
 
     <!-- Contenido principal -->

@@ -16,7 +16,11 @@ session_start();
     <link rel="stylesheet" href="/css/styles.css"> <!--CSS personalizado -->
 </head>
 <body>
-<?php require_once "menu.php";?>
+<?php 
+
+require_once __DIR__ . '/../config/db.php';
+
+require_once "menu.php";?>
 
     <!-- Sección con imagen y texto -->
     <div class="position-relative"> <!-- Agregar margen superior -->

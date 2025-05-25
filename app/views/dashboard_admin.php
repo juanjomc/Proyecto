@@ -17,7 +17,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 1) {
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<?php require_once __DIR__ . 'menu.php'; ?>
+<?php require_once __DIR__ . '/menu.php'; ?>
 
     <!-- Contenido principal -->
     <main class="container mt-5">

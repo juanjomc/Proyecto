@@ -26,7 +26,7 @@ try {
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <?php require_once __DIR__ . '/menu_admin.php'; ?>
+    <?php require_once __DIR__ . '/../menu.php'; ?>
 
     <main class="container mt-5">
         <h1 class="text-center mb-4">Gestión de Usuarios</h1>

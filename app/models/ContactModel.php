@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '../../config/db.php';
+// require_once __DIR__ . '../../config/db.php';
+$pdo = require __DIR__ . '../../config/db.php';
 
 class ContactModel {
     public function guardarContacto($datos) {
