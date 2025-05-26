@@ -99,52 +99,56 @@ if (!isset($_SESSION['user'])) {
             }
         });
 
-        function calcularDesglose(start, end) {
-            const diasSemana = [
-                'domingo',     // 0
-                'laborables',  // 1
-                'laborables',  // 2
-                'laborables',  // 3
-                'laborables',  // 4
-                'laborables',  // 5
-                'sabados'      // 6
-            ];
-            const limpieza = tarifas['limpieza'] ? parseFloat(tarifas['limpieza']) : 0;
+function calcularDesglose(start, end) {
+    const diasSemana = [
+        'domingo',     // 0
+        'laborables',  // 1
+        'laborables',  // 2
+        'laborables',  // 3
+        'laborables',  // 4
+        'laborables',  // 5
+        'sabados'      // 6
+    ];
+    const limpieza = tarifas['limpieza'] ? parseFloat(tarifas['limpieza']) : 0;
 
-            let desgloseHTML = '';
-            let total = 0;
+    let desgloseHTML = '';
+    let total = 0;
 
-            // Clonar las fechas para evitar modificar los objetos originales
-            const fechaInicio = new Date(start.getTime());
-            const fechaFin = new Date(end.getTime());
+    // Clonar las fechas para evitar modificar los objetos originales
+    const fechaInicio = new Date(start.getTime());
+    const fechaFin = new Date(end.getTime());
 
-            // Crear un array con todas las fechas del rango
-            const dias = [];
-            while (fechaInicio <= fechaFin) {
-                dias.push(new Date(fechaInicio));
-                fechaInicio.setDate(fechaInicio.getDate() + 1);
-            }
+    // Crear un array con todas las fechas del rango
+    const dias = [];
+    while (fechaInicio <= fechaFin) {
+        dias.push(new Date(fechaInicio));
+        fechaInicio.setDate(fechaInicio.getDate() + 1);
+    }
 
-            // Generar el desglose día por día
-            desgloseHTML += '<h5>Desglose de días:</h5><ul>';
-            dias.forEach(dia => {
-                const grupo = diasSemana[dia.getDay()];
-                const fechaFormateada = dia.toISOString().split('T')[0];
-                const tarifa = tarifas[grupo] ? parseFloat(tarifas[grupo]) : 0;
+    preciosPorDia = {}; // Reinicia el objeto
 
-            desgloseHTML += `<li>${fechaFormateada} (${grupo}) - ${tarifa}€</li>`;
-            total += tarifa;
-            });
-            desgloseHTML += '</ul>';
+    // Generar el desglose día por día
+    desgloseHTML += '<h5>Desglose de días:</h5><ul>';
+    dias.forEach(dia => {
+        const grupo = diasSemana[dia.getDay()];
+        const fechaFormateada = dia.toISOString().split('T')[0];
+        const tarifa = tarifas[grupo] ? parseFloat(tarifas[grupo]) : 0;
 
-            // Agregar tarifa de limpieza como concepto aparte
-            desgloseHTML += `<h5>Limpieza:</h5><p>${limpieza}€</p>`;
-            total += limpieza;
+        desgloseHTML += `<li>${fechaFormateada} (${grupo}) - ${tarifa}€</li>`;
+        total += tarifa;
 
-            // Mostrar el desglose y el total
-            document.getElementById('desglose').innerHTML = desgloseHTML;
-            document.getElementById('total').innerHTML = `<h4>Total: ${total}€</h4>`;
-        }
+        preciosPorDia[fechaFormateada] = tarifa; // Guarda el precio de ese día
+    });
+    desgloseHTML += '</ul>';
+
+    // Agregar tarifa de limpieza como concepto aparte
+    desgloseHTML += `<h5>Limpieza:</h5><p>${limpieza}€</p>`;
+    total += limpieza;
+
+    // Mostrar el desglose y el total
+    document.getElementById('desglose').innerHTML = desgloseHTML;
+    document.getElementById('total').innerHTML = `<h4>Total: ${total}€</h4>`;
+}
 
         document.getElementById('reservaForm').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -153,6 +157,7 @@ if (!isset($_SESSION['user'])) {
             const dateRange = document.getElementById('dateRange').value.split(' - ');
             formData.append('fecha_inicio', dateRange[0]);
             formData.append('fecha_fin', dateRange[1]);
+            formData.append('precios', JSON.stringify(preciosPorDia));
 
             fetch('/reservas/store', {
                 method: 'POST',

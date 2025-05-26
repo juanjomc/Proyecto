@@ -144,11 +144,11 @@ switch ($request) {
         // $controller = new ReservaController();
         // $controller->showForm();
         break;
-    // case 'reservas/store':
-    //     require '../app/controllers/ReservaController.php';
-    //     $controller = new ReservaController();
-    //     $controller->store();
-    //     break;
+    case '/reservas/store':
+        require '../app/controllers/ReservaController.php';
+        $controller = new ReservaController();
+        $controller->store();
+        break;
         
     // case 'reservas/obtener':
     //     require '../app/controllers/ReservaController.php';
