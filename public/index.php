@@ -155,24 +155,16 @@ switch ($request) {
         $controller = new UserController();
         $controller->misReservas();
         break;
-        
-    // case 'reservas/obtener':
-    //     require '../app/controllers/ReservaController.php';
-    //     $controller = new ReservaController();
-    //     $controller->obtenerReservas();
-    //     break;
     case '/tarifas/obtener':
         require '../app/controllers/TarifasController.php';
         $controller = new TarifasController();
         $controller->obtenerTarifas();
         break;
-
-    // case 'login/authenticate':
-    //     require '../app/controllers/LoginController.php';
-    //     $controller = new LoginController();
-    //     $controller->authenticate();
-    //     break;
-    
+    case '/user/comprobante':
+        require '../app/controllers/UserController.php';
+        $controller = new UserController();
+        $controller->comprobante();
+        break;
 
     default:
         http_response_code(404);

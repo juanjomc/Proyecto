@@ -17,6 +17,7 @@ mi-proyecto-web
 │   │   └── MainModel.php
 │   └── views
 │       └── main.php
+|
 │           
 ├── public
 │   ├── css
@@ -26,6 +27,9 @@ mi-proyecto-web
 │   ├── img
 │   └── index.php
 |   └── logout.php
+|
+├── vendor
+|
 ├── .htaccess
 ├── composer.json
 └── README.md

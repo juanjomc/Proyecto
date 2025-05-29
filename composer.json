@@ -1,9 +1,10 @@
 {
-  "name": "mi-proyecto-web",
+  "name": "juanjo/mi-proyecto-web",
   "description": "Un proyecto web en PHP utilizando el patrón MVC y Bootstrap.",
   "type": "project",
   "require": {
-    "php": "^7.4 || ^8.0"
+    "php": "^7.4 || ^8.0",
+    "dompdf/dompdf": "^3.1"
   },
   "autoload": {
     "psr-4": {

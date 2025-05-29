@@ -215,3 +215,22 @@ footer, footer p {
     max-width: 300px; /* Ancho máximo del botón */
     margin: 0 auto; /* Centrar horizontalmente */
 }
+
+/* ============================= */
+/* ESTILOS PERSONALIZADOS PDF FACTURA */
+/* ============================= */
+
+
+.a4-sheet {
+        background: #fff;
+        width: 210mm;
+        min-height: auto;
+        margin: 10mm auto;
+        padding: 15mm 10mm;
+        box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        border-radius: 8px;
+    }
+    .logo { width: 200px; height: auto; }
+    @media (max-width: 800px) {
+        .a4-sheet { width: 100%; min-width: unset; padding: 10px; }
+    }
