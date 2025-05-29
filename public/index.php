@@ -149,6 +149,12 @@ switch ($request) {
         $controller = new ReservaController();
         $controller->store();
         break;
+
+    case '/user/misreservas':
+        require '../app/controllers/UserController.php';
+        $controller = new UserController();
+        $controller->misReservas();
+        break;
         
     // case 'reservas/obtener':
     //     require '../app/controllers/ReservaController.php';

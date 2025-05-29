@@ -11,13 +11,28 @@ class ReservaController {
 {
     global $pdo;
 
+    if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
     // Recoge los datos del formulario
-    $usuario_id = $_POST['usuario_id'];
+    $usuario_id = $_SESSION['user']['id'];
     $fecha_inicio = $_POST['fecha_inicio'];
     $fecha_fin = $_POST['fecha_fin'];
-    $total = $_POST['total'] ?? 0;
+    
     $limpieza = $_POST['limpieza'] ?? 0;
     $precios = isset($_POST['precios']) ? json_decode($_POST['precios'], true) : []; // ¡Solo esta línea!
+    
+
+     // Consultar el precio de limpieza desde la base de datos (tabla opciones)
+    $stmt = $pdo->prepare("SELECT valor FROM opciones WHERE opcion = 'limpieza' LIMIT 1");
+    $stmt->execute();
+    $limpieza = $stmt->fetchColumn();
+    $limpieza = $limpieza !== false ? floatval($limpieza) : 0;
+
+    // Calcular el total sumando todos los días y la limpieza
+    $total = array_sum($precios) + $limpieza;
 
 
     // Puedes calcular el total y limpieza en el backend si lo prefieres
@@ -38,7 +53,7 @@ class ReservaController {
         // 2. Insertar los detalles día a día
         $start = new DateTime($fecha_inicio);
         $end = new DateTime($fecha_fin);
-        $end->modify('+1 day'); // Para incluir el último día
+        // $end->modify('+1 day'); // Para incluir el último día
 
         // Supón que recibes un array de precios por día desde el frontend o los calculas aquí
         // Ejemplo: $_POST['precios'] = ['2024-06-01' => 80, '2024-06-02' => 90, ...];

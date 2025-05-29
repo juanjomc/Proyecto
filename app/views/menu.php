@@ -95,7 +95,7 @@ elseif ( $_SESSION['user']['level'] == 2) {
                 <li class="nav-item"><a class="nav-link" href="/reservar">Reservar</a></li>
                 <li class="nav-item"><a class="nav-link" href="/#contactar">Contactar</a></li>
                 <li class="nav-item"><a class="nav-link" href="/user/panel">Mi Perfil</a></li>
-                <li class="nav-item"><a class="nav-link" href="/user/reservas">Mis Reservas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user/misreservas">Mis Reservas</a></li>
                 <li class="nav-item"><a class="nav-link" href="/logout.php">Cerrar Sesión</a></li>
             </ul>
         </div>

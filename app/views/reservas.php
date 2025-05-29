@@ -116,11 +116,13 @@ function calcularDesglose(start, end) {
 
     // Clonar las fechas para evitar modificar los objetos originales
     const fechaInicio = new Date(start.getTime());
+    fechaInicio.setDate(fechaInicio.getDate() + 1); // Empieza un día más tarde
     const fechaFin = new Date(end.getTime());
+    fechaFin.setDate(fechaFin.getDate() + 1); 
 
     // Crear un array con todas las fechas del rango
     const dias = [];
-    while (fechaInicio <= fechaFin) {
+    while (fechaInicio < fechaFin) {
         dias.push(new Date(fechaInicio));
         fechaInicio.setDate(fechaInicio.getDate() + 1);
     }

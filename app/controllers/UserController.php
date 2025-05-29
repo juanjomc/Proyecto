@@ -106,5 +106,32 @@ class UserController {
     $usuario = $model->obtenerPorId($userId);
     require __DIR__ . '/../views/dashboard_user.php';
     }
+
+    public function misReservas()
+{
+    session_start();
+    if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 2) {
+        header('Location: /');
+        exit;
+    }
+    global $pdo;
+    $usuario_id = $_SESSION['user']['id'];
+
+
+    // Obtener reservas del usuario
+    // echo "SELECT * FROM reservas WHERE id_usuario = ".$usuario_id." ORDER BY entrada DESC";
+    $stmt = $pdo->prepare("SELECT * FROM reservas WHERE id_usuario = :usuario_id ORDER BY entrada DESC");
+    $stmt->execute(['usuario_id' => $usuario_id]);
+    $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Para cada reserva, obtener los detalles
+    foreach ($reservas as $index => $reserva) {
+        $stmt2 = $pdo->prepare("SELECT * FROM detalles_reserva WHERE id_reserva = :id_reserva ORDER BY fecha ASC");
+        $stmt2->execute(['id_reserva' => $reserva['id']]);
+        $reservas[$index]['detalles'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    require '../app/views/user/misreservas.php';
+}
 }
 ?>
