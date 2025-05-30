@@ -166,6 +166,12 @@ switch ($request) {
         $controller->comprobante();
         break;
 
+    case '/reserva/crearPagoStripe':
+        require '../app/controllers/ReservaController.php';
+        $controller = new ReservaController();
+        $controller->crearPagoStripe();
+        break;
+
     default:
         http_response_code(404);
         echo "Página no encontrada";

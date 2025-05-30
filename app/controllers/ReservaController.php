@@ -76,5 +76,36 @@ class ReservaController {
         echo json_encode(['success' => false, 'error' => $e->getMessage()]);
     }
 }
+
+public function crearPagoStripe()
+    {
+        require_once '../vendor/autoload.php';
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+        $dotenv->load();
+
+        \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+
+        session_start();
+        $total = $_POST['total'] ?? 0;
+        $correo = $_SESSION['user']['correo']; // Asegúrate de que el correo está en la sesión
+
+        // 1. Buscar o crear el cliente en Stripe
+        $customer = \Stripe\Customer::create([
+            'email' => $correo,
+        ]);
+
+        // 2. Crear el PaymentIntent asociado al cliente
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => intval($total * 100), // en céntimos
+            'currency' => 'eur',
+            'customer' => $customer->id,
+            'metadata' => [
+                'email' => $correo
+            ]
+        ]);
+
+        echo json_encode(['clientSecret' => $intent->client_secret]);
+        exit;
+    }
 }
 ?>
