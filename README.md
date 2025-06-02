@@ -51,3 +51,14 @@ rango ==> administrador
 nombre ==> aa@aa.com    
 pass ==> 1     
 rango ==> usuario normal
+
+5. Hay que introducir en un archivo .env creado en la raiz del proyecto con estas variables.
+
+STRIPE_PUBLIC_KEY=clave publica de stripe
+STRIPE_SECRET_KEY=clave privada de stripe
+MAIL_HOST=smtp.gmail.com
+MAIL_USERNAME=tu correo de gmail
+MAIL_PASSWORD="tu password de aplicacion para conectar con gmail"
+MAIL_PORT=587
+MAIL_FROM=tu correo de gmail
+MAIL_FROM_NAME="el nombre del usuario con el que lo vera el cliente."
