@@ -42,7 +42,7 @@ mi-proyecto-web
 
 3. Acceder desde el navegador con esta url "http://localhost:8000/"
 
-4.- Usuarios
+4. Usuarios
 
 nombre ==> ju@ju.com    
 pass ==> 1     
