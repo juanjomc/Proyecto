@@ -92,6 +92,12 @@ switch ($request) {
         $controller->cambiarPassword();
     break;
 
+    case '/admin/reservas':
+        require '../app/controllers/ReservaController.php';
+        $controller = new ReservaController();
+        $controller->listarReservasFuturas();
+    break;
+
     case '/user/panel':
         //Panel de usuario
         require '../app/controllers/UserController.php';

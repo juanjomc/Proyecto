@@ -12,20 +12,16 @@ class ReservaController {
     global $pdo;
 
     if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
+        session_start();
+    }
 
     // Recoge los datos del formulario
     $usuario_id = $_SESSION['user']['id'];
     $fecha_inicio = $_POST['fecha_inicio'];
     $fecha_fin = $_POST['fecha_fin'];
-    
-    $limpieza = $_POST['limpieza'] ?? 0;
-    $precios = isset($_POST['precios']) ? json_decode($_POST['precios'], true) : []; // ¡Solo esta línea!
-    
+    $precios = isset($_POST['precios']) ? json_decode($_POST['precios'], true) : [];
 
-     // Consultar el precio de limpieza desde la base de datos (tabla opciones)
+    // Consultar el precio de limpieza desde la base de datos (tabla opciones)
     $stmt = $pdo->prepare("SELECT valor FROM opciones WHERE opcion = 'limpieza' LIMIT 1");
     $stmt->execute();
     $limpieza = $stmt->fetchColumn();
@@ -33,10 +29,6 @@ class ReservaController {
 
     // Calcular el total sumando todos los días y la limpieza
     $total = array_sum($precios) + $limpieza;
-
-
-    // Puedes calcular el total y limpieza en el backend si lo prefieres
-    // $total = ...; $limpieza = ...;
 
     try {
         // 1. Insertar la reserva principal
@@ -53,23 +45,100 @@ class ReservaController {
         // 2. Insertar los detalles día a día
         $start = new DateTime($fecha_inicio);
         $end = new DateTime($fecha_fin);
-        // $end->modify('+1 day'); // Para incluir el último día
-
-        // Supón que recibes un array de precios por día desde el frontend o los calculas aquí
-        // Ejemplo: $_POST['precios'] = ['2024-06-01' => 80, '2024-06-02' => 90, ...];
-        // $precios = $_POST['precios']; // Debes enviar esto desde JS o calcularlo aquí
 
         for ($date = clone $start; $date < $end; $date->modify('+1 day')) {
-        $fecha = $date->format('Y-m-d');
-        $precio = $precios[$fecha] ?? 0;
+            $fecha = $date->format('Y-m-d');
+            $precio = $precios[$fecha] ?? 0;
 
-        $stmt = $pdo->prepare("INSERT INTO detalles_reserva (id_reserva, fecha, precio, estado) VALUES (:id_reserva, :fecha, :precio, 'reservado')");
-        $stmt->execute([
-            'id_reserva' => $reserva_id,
-            'fecha' => $fecha,
-            'precio' => $precio
-        ]);
-    }
+            $stmt = $pdo->prepare("INSERT INTO detalles_reserva (id_reserva, fecha, precio, estado) VALUES (:id_reserva, :fecha, :precio, 'reservado')");
+            $stmt->execute([
+                'id_reserva' => $reserva_id,
+                'fecha' => $fecha,
+                'precio' => $precio
+            ]);
+        }
+
+        // ENVIAR EMAILS
+        require_once __DIR__ . '/../../vendor/autoload.php';
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+        $dotenv->load();
+
+        // Obtener email de notificaciones
+        $stmt = $pdo->prepare("SELECT valor FROM opciones WHERE opcion = 'email_notificaciones' LIMIT 1");
+        $stmt->execute();
+        $emailDestino = $stmt->fetchColumn();
+
+        // ----------- EMAIL AL ADMINISTRADOR -----------
+        if ($emailDestino) {
+            $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host = $_ENV['MAIL_HOST'];
+                $mail->SMTPAuth = true;
+                $mail->Username = $_ENV['MAIL_USERNAME'];
+                $mail->Password = $_ENV['MAIL_PASSWORD'];
+                $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = $_ENV['MAIL_PORT'];
+
+                $mail->setFrom($_ENV['MAIL_FROM'], $_ENV['MAIL_FROM_NAME']);
+                $mail->addAddress($emailDestino);
+                $mail->Subject = 'Nueva reserva realizada';
+
+                $body = "Hola, se ha realizado una nueva reserva:<br><br>";
+                $body .= "<strong>Usuario:</strong> " . htmlspecialchars($_SESSION['user']['correo']) . "<br>";
+                $body .= "<strong>Entrada:</strong> " . htmlspecialchars($fecha_inicio) . "<br>";
+                $body .= "<strong>Salida:</strong> " . htmlspecialchars($fecha_fin) . "<br>";
+                $body .= "<strong>Total:</strong> " . htmlspecialchars($total) . " €<br>";
+                $body .= "<strong>Limpieza:</strong> " . htmlspecialchars($limpieza) . " €<br>";
+                $body .= "<br><strong>Desglose por día:</strong><br>";
+                foreach ($precios as $fecha => $precio) {
+                    $body .= $fecha . ": " . $precio . " €<br>";
+                }
+                $mail->isHTML(true);
+                $mail->Body = $body;
+
+                $mail->send();
+            } catch (Exception $e) {
+                // Puedes loguear el error si quieres
+            }
+        }
+
+        // ----------- EMAIL AL USUARIO FINAL -----------
+        if (!empty($_SESSION['user']['correo'])) {
+            $mailUser = new PHPMailer\PHPMailer\PHPMailer(true);
+            try {
+                $mailUser->isSMTP();
+                $mailUser->Host = $_ENV['MAIL_HOST'];
+                $mailUser->SMTPAuth = true;
+                $mailUser->Username = $_ENV['MAIL_USERNAME'];
+                $mailUser->Password = $_ENV['MAIL_PASSWORD'];
+                $mailUser->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+                $mailUser->Port = $_ENV['MAIL_PORT'];
+
+                $mailUser->setFrom($_ENV['MAIL_FROM'], $_ENV['MAIL_FROM_NAME']);
+                $mailUser->addAddress($_SESSION['user']['correo']);
+                $mailUser->Subject = 'Gracias por tu reserva';
+
+                $bodyUser = "¡Hola!<br><br>Gracias por realizar tu reserva.<br>";
+                $bodyUser .= "Estos son los detalles de tu reserva:<br><br>";
+                $bodyUser .= "<strong>Entrada:</strong> " . htmlspecialchars($fecha_inicio) . "<br>";
+                $bodyUser .= "<strong>Salida:</strong> " . htmlspecialchars($fecha_fin) . "<br>";
+                $bodyUser .= "<strong>Total:</strong> " . htmlspecialchars($total) . " €<br>";
+                $bodyUser .= "<strong>Limpieza:</strong> " . htmlspecialchars($limpieza) . " €<br>";
+                $bodyUser .= "<br><strong>Desglose por día:</strong><br>";
+                foreach ($precios as $fecha => $precio) {
+                    $bodyUser .= $fecha . ": " . $precio . " €<br>";
+                }
+                $bodyUser .= "<br>Un saludo y gracias por confiar en nosotros.<br>";
+
+                $mailUser->isHTML(true);
+                $mailUser->Body = $bodyUser;
+
+                $mailUser->send();
+            } catch (Exception $e) {
+                // Puedes loguear el error si quieres
+            }
+        }
 
         echo json_encode(['success' => true]);
     } catch (PDOException $e) {
@@ -107,5 +176,27 @@ public function crearPagoStripe()
         echo json_encode(['clientSecret' => $intent->client_secret]);
         exit;
     }
+
+public function listarReservasFuturas()
+{
+    global $pdo;
+    $hoy = date('Y-m-d');
+    $stmt = $pdo->prepare("SELECT r.*, u.nombre, u.correo 
+                           FROM reservas r 
+                           JOIN users u ON r.id_usuario = u.id 
+                           WHERE r.entrada >= :hoy 
+                           ORDER BY r.entrada ASC");
+    $stmt->execute(['hoy' => $hoy]);
+    $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Obtener detalles para cada reserva
+    foreach ($reservas as &$reserva) {
+        $stmt2 = $pdo->prepare("SELECT fecha, precio FROM detalles_reserva WHERE id_reserva = :id_reserva ORDER BY fecha ASC");
+        $stmt2->execute(['id_reserva' => $reserva['id']]);
+        $reserva['detalles'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    require '../app/views/admin/admin_reservas.php';
+}
 }
 ?>

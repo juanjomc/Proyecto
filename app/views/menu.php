@@ -75,6 +75,7 @@ elseif ( $_SESSION['user']['level'] == 1) { ?>
                             <li><a class="dropdown-item" href="/admin/utilidades/pass">Cambiar contraseña</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/reservas">Reservas</a></li>
                     <li class="nav-item"><a class="nav-link" href="/admin/contactos">Formulario de Contactos</a></li>
                     <li class="nav-item"><a class="nav-link" href="/logout.php">Cerrar Sesión</a></li>
                 </ul>
