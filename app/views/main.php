@@ -83,7 +83,7 @@ require_once "menu.php";?>
         </div>
         <!-- Texto a la derecha -->
         <div class="col-md-6">
-            <p class="mb-4 dialg-box">Situado a excasos metros de la estacion de autobuses y tren, ambas <strong> conexion directa al aeropuerto.</strong> Parada de metro y autobus cercana, para moverte por el centro de Malaga y asi, olvidarte del coche.</p>
+            <p class="mb-4 dialg-box">Situado a escasos metros de la estacion de autobuses y tren, ambas <strong> conexión directa al aeropuerto.</strong> Parada de metro y autobus cercana, para moverte por el centro de Malaga y asi, olvidarte del coche.</p>
             <p class="mb-4 dialg-box"><strong> Piso de 60m recientemente reformado,</strong> ubicado en un <strong>barrio tranquilo.</strong> Totalmente exterior, con una cocina totalmente equipada (lavadora, horno, etc), dormitorio con ventilador de techo, cama de matrimonio, salon-comedor con sofacama, smart tv, aire acondicionado (frio/calor), mesa de comedor con 4 sillas y escritorio de trabajo y baño con plato de ducha, toallas, gel y secador de pelo.</p>
             <p>Barrio céntrico, ideal para <strong>visitar Malaga y huir del bullicio del centro de la ciudad.</strong> Cerca tenemos varios supermercados y centros comerciales, farmacia, bares, restaurantes, panadería, asador, gimnasio, heladería, etc.</p>
             <ul>
@@ -125,20 +125,20 @@ require_once "menu.php";?>
     </div>
 </div>
     </section>
-    <section id="destacar" class="container mt-5">
-<div class="container mt-5">
-    <h1 class="text-center mb-4">A Destacar</h1>
-    <div class="row align-items-center mb-4">
-        <!-- Imagen más grande -->
-        <div class="col-md-5">
-            <img src="/img/Exteriores 4.jpg" class="img-fluid rounded shadow" alt="Descripción de la imagen">
+<section id="destacar" class="container mt-5">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">A Destacar</h1>
+        <div class="row align-items-center mb-4">
+            <!-- Imagen más grande -->
+            <div class="col-md-5">
+                <img src="/img/Exteriores 4.jpg" class="img-fluid rounded shadow" alt="Descripción de la imagen">
+            </div>
+            <!-- Texto más pequeño -->
+            <div class="col-md-7">
+                <h2>Disfruta de Malaga</h2>
+                <p>En pleno centro de Malaga.</p>
+            </div>
         </div>
-        <!-- Texto más pequeño -->
-        <div class="col-md-7">
-            <h2>Disfruta de Malaga</h2>
-            <p>En pleno centro de Malaga.</p>
-        </div>
-    </div>
     <div class="row align-items-center mb-4">
         <!-- Imagen más grande -->
         <div class="col-md-5">
@@ -162,92 +162,80 @@ require_once "menu.php";?>
         </div>
     </div>
 </div>
-    </section>
-<section id="galeria" class="container mt-5">
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Galería</h1>
-    <!-- Fila 1 -->
-    <div class="row justify-content-center mb-4">
-        <div class="col-md-2">
-            <img src="/img/Bath 1.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 1" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Bath 1.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Bath 2.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 2" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Bath 2.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Bath 3.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 3" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Bath 3.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Cocina 1.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 4" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Cocina 1.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Cocina 2.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 5" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Cocina 2.jpg">
-        </div>
-    </div>
-    <!-- Fila 2 -->
-    <div class="row justify-content-center mb-4">
-        <div class="col-md-2">
-            <img src="/img/Cocina 4.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 6" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Cocina 4.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Cocina 5.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 7" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Cocina 5.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Dormitorio 1.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 8" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Dormitorio 1.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Dormitorio 2.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 9" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Dormitorio 2.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Dormitorio 3.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 10" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Dormitorio 3.jpg">
-        </div>
-    </div>
-    <!-- Fila 3 -->
-    <div class="row justify-content-center mb-4">
-        <div class="col-md-2">
-            <img src="/img/Dormitorio 4.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 11" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Dormitorio 4.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Salon 1.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 12" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Salon 1.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Salon 7.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 13" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Salon 7.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Salon 8.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 14" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Salon 8.jpg">
-        </div>
-        <div class="col-md-2">
-            <img src="/img/Salon 12.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 15" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Salon 12.jpg">
-        </div>
-    </div>
-</div>
-
 </section>
+
+<section id="galeria" class="container mt-5">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Galería</h1>
+        <div class="row g-3">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Bath 1.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 1" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Bath 1.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Bath 2.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 2" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Bath 2.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Bath 3.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 3" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Bath 3.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Cocina 1.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 4" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Cocina 1.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Cocina 2.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 5" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Cocina 2.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Cocina 4.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 6" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Cocina 4.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Cocina 5.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 7" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Cocina 5.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Dormitorio 1.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 8" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Dormitorio 1.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Dormitorio 2.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 9" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Dormitorio 2.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Dormitorio 3.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 10" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Dormitorio 3.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Dormitorio 4.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 11" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Dormitorio 4.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Salon 1.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 12" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Salon 1.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Salon 7.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 13" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Salon 7.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Salon 8.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 14" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Salon 8.jpg">
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <img src="/img/Salon 12.jpg" class="img-fluid rounded shadow gallery-img" alt="Imagen 15" data-bs-toggle="modal" data-bs-target="#galleryModal" data-bs-image="/img/Salon 12.jpg">
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Modal para la galería -->
-<div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body position-relative">
-                <!-- Flecha izquierda -->
-                <button class="btn btn-dark position-absolute top-50 start-0 translate-middle-y" id="prevImage" style="z-index: 1050;">
-                    &#8249;
-                </button>
-                <!-- Imagen ampliada -->
-                <img src="" class="img-fluid" id="galleryModalImage" alt="Imagen ampliada">
-                <!-- Flecha derecha -->
-                <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y" id="nextImage" style="z-index: 1050;">
-                    &#8250;
-                </button>
+<div class="modal fade" id="galleryModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-body text-center position-relative">
+                <img id="galleryModalImage" class="img-fluid rounded shadow" src="" alt="">
+                <!-- Botón anterior -->
+                <button id="prevImage" class="btn btn-light position-absolute top-50 start-0 translate-middle-y">‹</button>
+                <!-- Botón siguiente -->
+                <button id="nextImage" class="btn btn-light position-absolute top-50 end-0 translate-middle-y">›</button>
+                <!-- Botón cerrar (X) -->
+                <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
         </div>
     </div>
 </div>
 
 
-    <main class="container mt-5">
-        
-    </main>
-    
+
     <?php require __DIR__ . '/footer.php'; ?>
     
 <!-- Modal para Login -->

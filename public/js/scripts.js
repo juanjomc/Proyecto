@@ -5,10 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalImage = document.getElementById("galleryModalImage");
     const prevButton = document.getElementById("prevImage");
     const nextButton = document.getElementById("nextImage");
+    
 
     let currentIndex = 0;
 
-    // Abrir el modal con la imagen seleccionada
     galleryImages.forEach((img, index) => {
         img.addEventListener("click", function () {
             const imageSrc = this.getAttribute("data-bs-image");
@@ -17,20 +17,22 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Función para mostrar la imagen anterior
-    prevButton.addEventListener("click", function () {
+    prevButton.addEventListener("click", function (e) {
+        e.stopPropagation();
         currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
         const prevImageSrc = galleryImages[currentIndex].getAttribute("data-bs-image");
         modalImage.setAttribute("src", prevImageSrc);
     });
 
-    // Función para mostrar la imagen siguiente
-    nextButton.addEventListener("click", function () {
+    nextButton.addEventListener("click", function (e) {
+        e.stopPropagation();
         currentIndex = (currentIndex + 1) % galleryImages.length;
         const nextImageSrc = galleryImages[currentIndex].getAttribute("data-bs-image");
         modalImage.setAttribute("src", nextImageSrc);
     });
+
 });
+
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault(); // Evitar el envío tradicional del formulario
@@ -108,4 +110,5 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         })
         .catch(error => console.error('Error:', error));
 });
+
 

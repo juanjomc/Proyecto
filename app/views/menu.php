@@ -21,7 +21,7 @@ try {
 if (!isset($_SESSION['user'])) { ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 1050; position: relative;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" style="max-height: 120px;"></a>
+        <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" alt="Logo" class="img-fluid w-50 w-md-auto" style="max-height: 160px;"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -58,7 +58,7 @@ if (!isset($_SESSION['user'])) { ?>
 elseif ( $_SESSION['user']['level'] == 1) { ?>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" style="max-height: 120px;"></a>
+        <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" alt="Logo" class="img-fluid w-50 w-md-auto" style="max-height: 160px;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -87,7 +87,7 @@ elseif ( $_SESSION['user']['level'] == 2) {
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-    <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" style="max-height: 120px;"></a>
+    <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" alt="Logo" class="img-fluid w-50 w-md-auto" style="max-height: 160px;"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
