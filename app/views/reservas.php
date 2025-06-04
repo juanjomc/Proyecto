@@ -193,6 +193,7 @@ if (!isset($_SESSION['user'])) {?>
                             responseDiv.innerHTML = '<div class="alert alert-success">Reserva realizada correctamente.</div>';
                             document.getElementById('reservaForm').reset();
                             document.getElementById('payment-form').reset();
+                            setTimeout(function() {window.location.href = "user/misreservas";}, 5000);
                         } else {
                             responseDiv.innerHTML = '<div class="alert alert-danger">Error: ' + (data.error || 'Error desconocido') + '</div>';
                         }

@@ -56,12 +56,12 @@ if (!isset($_SESSION['user'])) { ?>
 
 }
 elseif ( $_SESSION['user']['level'] == 1) { ?>
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 1050; position: relative;">
+    <div class="container-fluid">
         <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" alt="Logo" class="img-fluid w-50 w-md-auto" style="max-height: 160px;"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="/admin/usuarios">Gestión de Usuarios</a></li>
@@ -85,9 +85,9 @@ elseif ( $_SESSION['user']['level'] == 1) { ?>
 <?php }
 elseif ( $_SESSION['user']['level'] == 2) { 
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 1050; position: relative;">
     <div class="container-fluid">
-    <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" alt="Logo" class="img-fluid w-50 w-md-auto" style="max-height: 160px;"></a>
+        <a class="navbar-brand" href="/"><img src="/img/logo/Logo.png" alt="Logo" class="img-fluid w-50 w-md-auto" style="max-height: 160px;"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

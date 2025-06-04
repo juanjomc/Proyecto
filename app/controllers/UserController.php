@@ -120,7 +120,7 @@ class UserController {
 
         // Obtener reservas del usuario
         // echo "SELECT * FROM reservas WHERE id_usuario = ".$usuario_id." ORDER BY entrada DESC";
-        $stmt = $pdo->prepare("SELECT * FROM reservas WHERE id_usuario = :usuario_id ORDER BY entrada DESC");
+        $stmt = $pdo->prepare("SELECT * FROM reservas WHERE id_usuario = :usuario_id ORDER BY fecha_reserva DESC");
         $stmt->execute(['usuario_id' => $usuario_id]);
         $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

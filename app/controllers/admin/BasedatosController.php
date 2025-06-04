@@ -16,7 +16,8 @@ class BackupController
         $backupFile = 'backup_' . date('Y-m-d_H-i-s') . '.sql';
 
         // Comando para generar la copia de seguridad
-        $command = "mysqldump --user=$username --password=$password --host=$host $dbname > $backupFile";
+        $mysqlPath = '/usr/local/mysql/bin/mysqldump'; // Asegúrate de que la ruta al comando mysqldump sea correcta
+        $command = "$mysqlPath --no-tablespaces --user=$username --password=$password --host=$host $dbname > $backupFile";
 
         // Ejecutar el comando
         system($command, $output);
@@ -75,7 +76,8 @@ class BackupController
                 $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
 
                 // Comando para restaurar la base de datos
-                $command = "mysql --user=$username --password=$password --host=$host $dbname < $fileTmpPath";
+                $mysqlPath = '/usr/local/mysql/bin/mysql';
+                $command = "$mysqlPath --user=$username --password=$password --host=$host $dbname < $fileTmpPath";
 
                 // Ejecutar el comando
                 system($command, $output);
