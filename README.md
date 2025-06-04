@@ -47,6 +47,7 @@ mi-proyecto-web
 4. Importa el archivo SQL. Tienes 2 uno que es vacios que tiene un usuario administrador y un usuario normal y el con datos que tienen mas datos introducidos.
 5. Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
 
+```
 STRIPE_PUBLIC_KEY=clave publica de stripe
 STRIPE_SECRET_KEY=clave privada de stripe
 MAIL_HOST=smtp.gmail.com
@@ -55,6 +56,7 @@ MAIL_PASSWORD="tu password de aplicacion para conectar con gmail"
 MAIL_PORT=587
 MAIL_FROM=tu correo de gmail
 MAIL_FROM_NAME="el nombre del usuario con el que lo vera el cliente."
+```
 
 Para la contraseña de password, necesitas tener la doble autentificacion en esa cuenta de correo y luego accedes a esta
 url https://myaccount.google.com/apppasswords le das un nombre y te genera una contraseña  16 caractares.
