@@ -25,12 +25,12 @@
                     <?php if (isset($reserva['fecha_reserva'])): ?>
                         <span class="text-secondary" style="font-size:0.95em;">
                             <i class="bi bi-clock-history"></i>
-                            <?php echo date('d-m-Y H:i', strtotime($reserva['fecha_reserva'])); ?>
+                            <?php echo "<strong>Dia de reserva </strong>". date('d-m-Y H:i', strtotime($reserva['fecha_reserva'])); ?>
                         </span>
                     <?php endif; ?>
-                    <i class="bi bi-calendar-event text-primary"></i> Entrada: <?php echo $reserva['entrada']; ?>
-                    <i class="bi bi-calendar-event text-danger"></i> Salida: <?php echo $reserva['salida']; ?>
-                    Estado: <?php echo $reserva['estado']; ?>
+                    <i class="bi bi-calendar-event text-primary"></i> <strong> Entrada:</strong> <?php echo date('d-m-Y', strtotime($reserva['entrada'])); ?>
+                    <i class="bi bi-calendar-event text-danger"></i> <strong> Salida:</strong> <?php echo date('d-m-Y', strtotime($reserva['salida'])); ?>
+                    <strong>Estado:</strong> <?php echo $reserva['estado']; ?>
                     <?php if (strtolower($reserva['estado']) === 'pagado'): ?>
                         <i class="bi bi-check-circle-fill text-success ms-1"></i>
                     <?php endif; ?>
