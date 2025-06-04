@@ -94,8 +94,8 @@ if (!isset($_SESSION['user'])) {?>
             autoApply: true,
             lang: 'es',
             minDate: new Date().toISOString().split('T')[0],
-            tooltipText: { one: 'día', other: 'días' },
-            tooltipNumber: (totalDays) => totalDays,
+            tooltipText: { one: 'noche', other: 'noches' },
+            tooltipNumber: (totalDays) =>  Math.max(totalDays - 1, 0),
             setup: (picker) => {
                 picker.on('selected', (start, end) => {
                     calcularDesglose(start.dateInstance, end.dateInstance);
