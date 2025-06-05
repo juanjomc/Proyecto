@@ -177,6 +177,11 @@ switch ($request) {
         $controller = new ReservaController();
         $controller->crearPagoStripe();
         break;
+    case '/reservas/ocupadas':
+        require '../app/controllers/ReservaController.php';
+        $controller = new ReservaController();
+        $controller->ocupadas();
+        break;
 
     default:
         http_response_code(404);

@@ -76,6 +76,7 @@ if (!isset($_SESSION['user'])) {?>
         let tarifas = {};
         let preciosPorDia = {};
         let totalReserva = 0;
+        let diasOcupados = [];
 
         // Obtener las tarifas desde la base de datos
         fetch('/tarifas/obtener')
@@ -87,21 +88,36 @@ if (!isset($_SESSION['user'])) {?>
                 console.error('Error al obtener las tarifas:', error);
             });
 
-        const picker = new Litepicker({
-            element: document.getElementById('dateRange'),
-            singleMode: false,
-            format: 'YYYY-MM-DD',
-            autoApply: true,
-            lang: 'es',
-            minDate: new Date().toISOString().split('T')[0],
-            tooltipText: { one: 'noche', other: 'noches' },
-            tooltipNumber: (totalDays) =>  Math.max(totalDays - 1, 0),
-            setup: (picker) => {
-                picker.on('selected', (start, end) => {
-                    calcularDesglose(start.dateInstance, end.dateInstance);
-                });
-            }
-        });
+        // Obtener los días ocupados desde el backend
+        fetch('/reservas/ocupadas')
+            .then(response => response.json())
+            .then(data => {
+                diasOcupados = data;
+                iniciarPicker();
+            })
+            .catch(error => {
+                console.error('Error al obtener los días ocupados:', error);
+                iniciarPicker(); // Inicia igual aunque no haya datos
+            });
+
+        function iniciarPicker() {
+            const picker = new Litepicker({
+                element: document.getElementById('dateRange'),
+                singleMode: false,
+                format: 'YYYY-MM-DD',
+                autoApply: true,
+                lang: 'es',
+                minDate: new Date().toISOString().split('T')[0],
+                tooltipText: { one: 'noche', other: 'noches' },
+                tooltipNumber: (totalDays) =>  Math.max(totalDays - 1, 0),
+                lockDays: diasOcupados,
+                setup: (picker) => {
+                    picker.on('selected', (start, end) => {
+                        calcularDesglose(start.dateInstance, end.dateInstance);
+                    });
+                }
+            });
+        }
 
         function calcularDesglose(start, end) {
             const diasSemana = [

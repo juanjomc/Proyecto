@@ -177,6 +177,37 @@ public function crearPagoStripe()
         exit;
     }
 
+public function ocupadas()
+    {
+        global $pdo;
+        header('Content-Type: application/json');
+
+        // Selecciona todas las reservas confirmadas (puedes ajustar el estado si lo necesitas)
+        $stmt = $pdo->query("SELECT entrada, salida FROM reservas WHERE estado = 'pagado'");
+        $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $ocupados = [];
+        foreach ($reservas as $reserva) {
+            $entrada = new DateTime($reserva['entrada']);
+            $salida = new DateTime($reserva['salida']);
+            // El DatePeriod excluye la fecha de fin, así que bloquea hasta el día anterior a la salida
+            $periodo = new DatePeriod(
+                $entrada,
+                new DateInterval('P1D'),
+                $salida
+            );
+            foreach ($periodo as $fecha) {
+                $ocupados[] = $fecha->format('Y-m-d');
+            }
+        }
+
+        // Elimina duplicados por si hay solapamientos
+        $ocupados = array_values(array_unique($ocupados));
+
+        echo json_encode($ocupados);
+        exit;
+    }
+
 public function listarReservasFuturas()
 {
     global $pdo;
