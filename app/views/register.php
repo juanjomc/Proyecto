@@ -42,9 +42,10 @@
 <div class="text-center">
     <button type="submit" class="btn btn-primary btn-lg" id="registerButton" disabled>Registrar</button>
 </div>
-        </form>
-        <!-- Contenedor para mostrar mensajes -->
+ <!-- Contenedor para mostrar mensajes -->
         <div id="registerResponse" class="mt-3"></div>
+        </form>
+       
     </div>
 
         <?php require __DIR__ . '/footer.php'; ?>

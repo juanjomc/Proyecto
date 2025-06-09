@@ -38,8 +38,8 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['level'] != 1) {
             <tr>
                 <td><?php echo htmlspecialchars($reserva['nombre']); ?></td>
                 <td><?php echo htmlspecialchars($reserva['correo']); ?></td>
-                <td><?php echo htmlspecialchars($reserva['entrada']); ?></td>
-                <td><?php echo htmlspecialchars($reserva['salida']); ?></td>
+                <td><?php echo date('d-m-Y', strtotime($reserva['entrada'])); ?></td>
+                <td><?php echo date('d-m-Y', strtotime($reserva['salida'])); ?></td>
                 <td><?php echo htmlspecialchars($reserva['fecha_reserva']); ?></td>
                 <td><?php echo htmlspecialchars($reserva['total']); ?></td>
                 <td><?php echo htmlspecialchars($reserva['limpieza']); ?></td>

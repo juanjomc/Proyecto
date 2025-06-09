@@ -226,6 +226,7 @@ public function listarReservasFuturas()
         $stmt2->execute(['id_reserva' => $reserva['id']]);
         $reserva['detalles'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     }
+    unset($reserva); // Desreferencia la última reserva para evitar problemas   
 
     require '../app/views/admin/admin_reservas.php';
 }

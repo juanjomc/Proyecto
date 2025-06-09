@@ -29,7 +29,7 @@ require_once "menu.php";?>
         <h1 class="mb-3">Bienvenido a <strong>Malaga</strong></h1>
         <p class="mb-4 dialg-box">Tu apartamento para pasar unos días en <strong>Malaga</strong></p>
         <div>
-            <a href="#contactar" class="btn btn-custom-left btn-lg me-2">Contactar</a>
+            <a href="#contactar" class="btn btn-custom-left btn-lg me-2 mb-2 mb-md-0">Contactar</a>
             <a href="#donde" class="btn btn-custom-right btn-lg">Dónde Estamos</a>
         </div>
     </div>

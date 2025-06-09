@@ -65,9 +65,10 @@ if (!isset($_SESSION['user'])) {?>
     Pagar y reservar
     </button>
     <div id="card-errors" role="alert" class="mt-2 text-danger" aria-live="polite"></div>
+    <div id="reservaResponse" class="mt-3"></div>
     </form>
 
-    <div id="reservaResponse" class="mt-3"></div>
+    
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
